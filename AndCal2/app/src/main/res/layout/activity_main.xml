@@ -56,6 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onButtonCalACClicked"
                     android:text="AC" />
             </LinearLayout>
 
@@ -91,6 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onButtonCal0Clicked"
                     android:text="0" />
             </LinearLayout>
 
