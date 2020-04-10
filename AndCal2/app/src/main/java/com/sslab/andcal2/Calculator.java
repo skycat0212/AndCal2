@@ -3,8 +3,8 @@ package com.sslab.andcal2;
 public class Calculator {
 
 
-    private double price1;
-    private double price2;
+    private double value1;
+    private double value2;
     private double result;
 
     private int operator; // 연산자 0 초기화, 1 은 연산이어서 할때, 2 + , 3 - , 4 * , 5 / // 이퀄 제외하기
@@ -12,8 +12,8 @@ public class Calculator {
 //    private int equalFlag;
 
     Calculator(){
-        price1 = 0;
-        price2 = 0;
+        value1 = 0;
+        value2 = 0;
         result = 0;
         priceFlag = 0;
         operator = 0;
@@ -26,11 +26,11 @@ public class Calculator {
         else priceFlag = 1;}
     public int getPriceFlag(){ return priceFlag; }
 
-    public void setPrice1(double inputPrice){ price1 = inputPrice; }
-    public double getPrice1(){ return price1; }
+    public void setValue1(double inputPrice){ value1 = inputPrice; }
+    public double getValue1(){ return value1; }
 
-    public void setPrice2(double inputPrice){ price2 = inputPrice; }
-    public double getPrice2(){ return price2; }
+    public void setValue2(double inputPrice){ value2 = inputPrice; }
+    public double getValue2(){ return value2; }
 
     public void setResult(double inputPrice){ result = inputPrice; }
     public double getResult(){ return result; }
@@ -51,16 +51,16 @@ public class Calculator {
         double result=0;
         switch (operator){
             case 5:
-                result = divide(price1,price2);
+                result = divide(value1, value2);
                 break;
             case 4:
-                result = multiple(price1,price2);
+                result = multiple(value1, value2);
                 break;
             case 3:
-                result = minus(price1,price2);
+                result = minus(value1, value2);
                 break;
             case 2:
-                result = plus(price1,price2);
+                result = plus(value1, value2);
                 break;
         }
         return result;
