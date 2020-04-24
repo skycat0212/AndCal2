@@ -16,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
-            android:textSize="20sp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,6 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="acButtonClick"
                     android:text="AC"
                     android:textSize="50sp" />
             </LinearLayout>
@@ -138,6 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="equalButtonClick"
                     android:text="="
                     android:textSize="50sp" />
             </LinearLayout>
@@ -153,6 +155,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="plusButtonClick"
                     android:text="+"
                     android:textSize="50sp" />
 
@@ -161,6 +164,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="minusButtonClick"
                     android:text="-"
                     android:textSize="50sp" />
 
@@ -169,6 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="multipleButtonClick"
                     android:text="*"
                     android:textSize="50sp" />
 
@@ -177,6 +182,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="divideButtonClick"
                     android:text="/"
                     android:textSize="50sp" />
             </LinearLayout>
