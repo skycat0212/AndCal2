@@ -192,9 +192,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rowString = textView.getText().toString();
 
 
-        ArrayList firstArray;
+        ArrayList num1Array;
+        ArrayList oper1Array;
 
-        firstArray = new ArrayList();
+        num1Array = new ArrayList();
+        oper1Array = new ArrayList();
+
 
         while(true) {
 
@@ -203,22 +206,143 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if(plusLocation == minusLocation){
                 // + 와 - 가 없으면
+                // TODO: 2020-04-27 작성
+                // 남아있는 것들을 숫자스택에 넣기
+                num1Array.add(rowString.substring(0,rowString.length()-1));
+                break;
             }
             else if(plusLocation == -1){ plusLocation = minusLocation + 1; } // -1 이면 가상의 값을 갖게 해. 연산에 영향을 주지 않는 값.
             else if(minusLocation == -1){ minusLocation = plusLocation + 1;} // -1 이면 가상의 값을 갖게 해. 연산에 영향을 주지 않는 값.
 
             if(plusLocation < minusLocation){
+                // 숫자를 숫자 스택
+                // 플러스를 연산자 스택에 넣기
+                num1Array.add(rowString.substring(0,plusLocation));
+                oper1Array.add('+');
+                rowString = rowString.substring(plusLocation+1,rowString.length());
 
+                // 곱하기 나누기 연산하기
+//                num1Array = doMulDiv(num1Array);
 
             }
             else if(minusLocation < plusLocation){
+                // 숫자를 숫자 스택
+                // 마이너스를 연산자 스택에 넣기
+                num1Array.add(rowString.substring(0,minusLocation));
+                oper1Array.add('-');
+                rowString = rowString.substring(minusLocation+1,rowString.length());
 
+                // 곱하기 나누기 연산하기
+//                num1Array = doMulDiv(num1Array);
+            }
 
+        }
+        //플마계산하기
+        double result = 0;
+        int value2 = 0;
+
+        while(true){
+
+            if (num1Array.size()==1 && value2 ==0){
+                result = Integer.valueOf(num1Array.get(0).toString());
+                num1Array.remove(0);
+                break;
+            }
+
+            result = Integer.valueOf(num1Array.get(0).toString());
+            num1Array.remove(0);
+            value2 = Integer.valueOf(num1Array.get(0).toString());
+
+            if(oper1Array.get(0).toString().equals('+')){
+                oper1Array.remove(0);
+                result = result + value2;
+            }
+            else {
+                oper1Array.remove(0);
+                result = result - value2;
+            }
+
+            if(oper1Array.size() == 0){
+                break;
+            }
+
+        }
+        textView.append(String.valueOf(result));
+
+    }
+
+    public ArrayList doMulDiv(ArrayList num1Array){
+        ArrayList num2Array = new ArrayList();
+        ArrayList oper2Array = new ArrayList();
+
+        int arraySize = num1Array.size();
+        String target = num1Array.get(arraySize-1).toString();
+
+        while(true) {
+
+            int mulLocation = target.indexOf("*"); // + 위치를 반환. 없으면 -1
+            int divLocation = target.indexOf("/");// - 위치를 반환. 없으면 -1
+
+            if(mulLocation == divLocation){
+                // * 와 / 가 없으면
+                // 남아있는 것들을 숫자스택에 넣기
+                num2Array.add(target);
+                break;
+            }
+            else if(mulLocation == -1){ mulLocation = divLocation + 1; } // -1 이면 가상의 값을 갖게 해. 연산에 영향을 주지 않는 값.
+            else if(divLocation == -1){ divLocation = mulLocation + 1;} // -1 이면 가상의 값을 갖게 해. 연산에 영향을 주지 않는 값.
+
+            if(mulLocation < divLocation){
+                // 숫자를 숫자 스택
+                // 곱하기를 연산자 스택에 넣기
+                num2Array.add(target.substring(0,mulLocation));
+                oper2Array.add('*');
+                target = target.substring(mulLocation+1,target.length());
+            }
+            else if(divLocation < mulLocation){
+                // 숫자를 숫자 스택
+                // 나누기를 연산자 스택에 넣기
+                num2Array.add(target.substring(0,divLocation));
+                oper2Array.add('/');
+                target = target.substring(divLocation+1,target.length());
+            }
+        }
+        //스택에서 가져와서 계산하기. 곱,나누기
+        double result = 0;
+        int value2 = 0;
+
+        while(true){
+
+            if (num2Array.size()==1){
+                result = Integer.valueOf(num2Array.get(0).toString());
+                num2Array.remove(0);
+                break;
+            }
+
+            value2 = Integer.valueOf(num2Array.get(0).toString());
+
+            if(oper2Array.get(0).toString().equals('*')){
+                oper2Array.remove(0);
+                result = result * value2;
+            }
+            else {
+                oper2Array.remove(0);
+                result = result / value2;
+            }
+
+            if(oper2Array.size() == 0){
+                break;
             }
 
         }
 
-        }
+        num1Array.remove(arraySize-1);
+        num1Array.add(result);
+
+
+        return num1Array;
+        //이거 아니야. 계산한 값을 num1Array에 대치시켜서 num1Array를 내보내거나 복사해서 add 한다음에 내보내야돼.
+    }
 
 
 
